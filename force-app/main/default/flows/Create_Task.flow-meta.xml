@@ -3,34 +3,46 @@
     <apiVersion>63.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
-        <name>Assign_Task_Variable</name>
-        <label>Assign Task Variable</label>
+        <name>Assign_Task_Details</name>
+        <label>Assign Task Details</label>
         <locationX>176</locationX>
         <locationY>242</locationY>
         <assignmentItems>
-            <assignToReference>task.Id</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>activityId</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>task.WhatId</assignToReference>
+            <assignToReference>taskDetail.WhatId</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>accountId</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>task.WhoId</assignToReference>
+            <assignToReference>taskDetail.WhoId</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>contactId</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>taskDetail.ActivityDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>taskDetail.Subject</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>fx_taskSubject</elementReference>
+            </value>
+        </assignmentItems>
     </assignments>
     <description>Create a new activity/task record for a given Account and Contact</description>
     <environments>Default</environments>
+    <formulas>
+        <name>fx_taskSubject</name>
+        <dataType>String</dataType>
+        <expression>&quot;Agent Task: &quot; &amp; {!$Flow.InterviewGuid}</expression>
+    </formulas>
     <interviewLabel>Create Task {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Create Task</label>
     <processMetadataValues>
@@ -59,7 +71,7 @@
         <locationY>134</locationY>
         <assignRecordIdToReference>activityId</assignRecordIdToReference>
         <connector>
-            <targetReference>Assign_Task_Variable</targetReference>
+            <targetReference>Assign_Task_Details</targetReference>
         </connector>
         <inputAssignments>
             <field>ActivityDate</field>
@@ -125,7 +137,7 @@
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
-        <isOutput>true</isOutput>
+        <isOutput>false</isOutput>
     </variables>
     <variables>
         <name>contactId</name>
@@ -135,11 +147,11 @@
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <name>task</name>
-        <dataType>SObject</dataType>
+        <name>taskDetail</name>
+        <apexClass>TaskWrapper</apexClass>
+        <dataType>Apex</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>true</isOutput>
-        <objectType>Task</objectType>
     </variables>
 </Flow>
