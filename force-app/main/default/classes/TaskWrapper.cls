@@ -1,4 +1,5 @@
 public class TaskWrapper {
+
     @AuraEnabled
     public Id WhatId;
 

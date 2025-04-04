@@ -22,13 +22,6 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>taskDetail.ActivityDate</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>$Flow.CurrentDate</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
             <assignToReference>taskDetail.Subject</assignToReference>
             <operator>Assign</operator>
             <value>
@@ -100,7 +93,7 @@
         <inputAssignments>
             <field>Subject</field>
             <value>
-                <stringValue>Agent Task</stringValue>
+                <elementReference>fx_taskSubject</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
